@@ -1,0 +1,62 @@
+div.top_spacer{
+  height:450px;
+}
+
+div.search_box{
+  height:90px;
+  width:100%;
+}
+
+div.logo{
+  margin-top:10px;
+  text-align:center;
+}
+
+input.search_text{
+  position: absolute;
+  margin-left: -300px;
+  font-size: 20px;
+  top: 350px; 
+  left: 50%;
+  width: 600px;
+  height: 30px;
+}
+
+div.online_now{
+  position: absolute;
+  margin-left: -200px;
+  left: 50%;
+  width: 400px;
+  text-align: center;
+}
+
+div.online_now_list{
+  width:100%;
+
+  border-top-style:solid;
+  border-top-width:1px;
+  border-bottom-style:solid;
+  border-bottom-width:1px;
+}
+
+div.online_now_entry{
+  margin-left:25px;
+  width:350px;
+  height:25px;
+
+  border-bottom-style:solid;
+  border-bottom-width:1px;
+  border-bottom-color:#DDDDDD;
+}
+
+div.online_now_name{
+  float:left;
+  width: 200px;
+  text-align: left;
+}
+
+div.online_now_ip{
+  float:left;
+  width: 150px;
+  text-align: right;
+}

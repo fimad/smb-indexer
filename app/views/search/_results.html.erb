@@ -1,0 +1,23 @@
+<% @my_results.each do |result| %>
+<!--<div class="result_entry" id="result_<%=result.id%>" onmouseover="selectElement('result_<%=result.id%>')" onmouseout="unselectElement('result_<%=result.id%>')"> -->
+<div class="result_entry" id="result_<%=result.id%>">
+  <div class="result_entry_left">
+    <div class="result_entry_name">
+    <%= result.name %>
+    </div>
+    <div class="result_entry_path">
+    <a href="<%=url_for(:controller=>"browse",:action=>"path",:q=>result.path)%>"><%= result.path %></a>
+    </div>
+  </div>
+  <div class="result_entry_middle">&nbsp;</div>
+  <div class="result_entry_right">
+    <div class="result_entry_date">
+      <%= result.created_at().strftime("%b %d %Y") %>
+    </div>
+    <div class="result_entry_size">
+      <%= result.fancy_size() %>
+    </div>
+  </div>
+</div>
+<% end %>
+

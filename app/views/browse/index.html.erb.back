@@ -1,0 +1,10 @@
+<% content_for :header do %>
+  <%= stylesheet_link_tag "browse.css" %>
+<% end %>
+
+<div class="browse_top">
+  Show all? Some other info up here?
+</div>
+<div class="browse_server_list">
+  <%= render "server" %>
+</div>

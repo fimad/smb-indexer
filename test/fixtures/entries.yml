@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  server_id: 1
+  parent_id: 1
+  size_in_kb: 1
+  name: MyString
+  search_name: MyString
+  folder: false
+  created_at: 2011-07-22 00:29:41
+
+two:
+  server_id: 1
+  parent_id: 1
+  size_in_kb: 1
+  name: MyString
+  search_name: MyString
+  folder: false
+  created_at: 2011-07-22 00:29:41

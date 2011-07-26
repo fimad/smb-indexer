@@ -1,0 +1,17 @@
+<div class="online_now">
+Online Now:
+<div class="online_now_list">
+<% @online_now.each do |server| %>
+  <% if server.online %>
+  <div class="online_now_entry">
+    <div class="online_now_name">
+    <%= server.name %>
+    </div>
+    <div class="online_now_ip">
+    <%= server.ip %>
+    </div>
+  </div>
+  <% end %>
+<% end %>
+</div>
+</div>

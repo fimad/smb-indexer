@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>:D</title>
+  <%= stylesheet_link_tag "main.css" %>
+  <%= javascript_include_tag :defaults %>
+  <%= javascript_include_tag "util.js" %>
+  <%= csrf_meta_tag %>
+  <%= yield :header %>
+</head>
+<body>
+<div class="wrapper">
+<div class="top">
+  <div class="bar">
+      <div class="<%= (params[:controller] == "search")?"item_chosen" : "item"%>">
+        <%= link_to "Search", :controller => "search", :action => "index" %>
+      </div>
+      <div class="<%= (params[:controller] == "browse")?"item_chosen" : "item"%>">
+        <%= link_to "Browse", :controller => "browse", :action => "index" %>
+      </div>
+      <div class="<%= (params[:controller] == "alerts")?"item_chosen" : "item"%>">
+      <a href="">Alerts</a>
+      </div>
+      <div class="<%= (params[:controller] == "about")?"item_chosen" : "item"%>">
+        <%= link_to "About", :controller => "about", :action => "index" %>
+      </div>
+  </div>
+  <div class="top_content">
+    <%= yield :top %>
+  </div>
+</div>
+<div class="top_spacer">&nbsp;</div>
+
+<div class="content">
+<%= yield %>
+</div>
+</div>
+
+</body>
+</html>

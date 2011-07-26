@@ -1,0 +1,29 @@
+<% content_for :header do %>
+  <%= stylesheet_link_tag "results.css" %>
+<% end %>
+
+<% content_for :top do %>
+  <%= render "search_bar" %>
+
+<%
+#Lables along the top of each column 
+%>
+<div style="">
+  <div class="result_entry_left">
+    <div class="result_entry_name">
+    name
+    </div>
+  </div>
+  <div class="result_entry_middle">&nbsp;</div>
+  <div class="result_entry_right">
+    <div class="result_entry_date">
+    date
+    </div>
+    <div class="result_entry_size">
+    size
+    </div>
+  </div>
+</div>
+<% end %>
+
+<%= render "results" %>

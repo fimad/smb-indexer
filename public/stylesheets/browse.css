@@ -1,0 +1,52 @@
+div.top_spacer{
+  height:150px;
+}
+
+div.content{
+  position:absolute;
+  left:50%;
+  margin-left:-400px;
+  width:800px;
+  text-align:center;
+}
+
+div.content a{
+  text-decoration: none;
+  color: #000000;
+}
+
+div.browse_top{
+  border-bottom-style:solid;
+  border-bottom-width:1px;
+}
+
+div.browse_server_list{
+  margin-left:50px;
+  width:700px;
+  text-align:left;
+}
+
+div.browse_server{
+  height: 30px;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #DDDDDD; 
+  padding-top:10px;
+}
+
+div.browse_server_name{
+  width:445px;
+  float:right;
+}
+
+div.browse_server_ip{
+  width:145px;
+  float:right;
+}
+
+div.browse_server_size{
+  width:75px;
+  padding-right: 25px;
+  float:right;
+  text-align: right;
+}

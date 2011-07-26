@@ -1,0 +1,15 @@
+<% @servers.each do |server| %>
+  <a href="<%= url_for( :action=>"path", :q=>server.name) %>" onmouseover="selectElement('server_<%=server.id%>')" onmouseout="unselectElement('server_<%=server.id%>')">
+  <div class="browse_server" id="server_<%=server.id%>">
+    <div class="browse_server_size">
+      <%= server.fancy_size %>
+    </div>
+    <div class="browse_server_ip">
+      <%= server.ip or "-" %>
+    </div>
+    <div class="browse_server_name">
+      <%= server.name %>
+    </div>
+  </div>
+  </a>
+<% end %>

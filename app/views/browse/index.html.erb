@@ -1,0 +1,29 @@
+<% content_for :header do %>
+  <%= stylesheet_link_tag "browse_path.css" %>
+<% end %>
+
+<% content_for :top do %>
+<% end %>
+
+<%=render "sidebar"%>
+
+<div class="entry_list">
+<% @servers.each do |entry| %>
+  <a href="<%=url_for(:action=>"path", :q=>"#{entry.name}")%>" onmouseover="selectElement('entry_<%=entry.id%>')" onmouseout="unselectElement('entry_<%=entry.id%>')">
+  <div class="entry" id="entry_<%=entry.id%>">
+    <div class="entry_size">
+      <%=entry.fancy_size%>
+    </div>
+    <div class="entry_date">
+      <%= entry.updated_at().strftime("%b %d %Y") %>
+    </div>
+    <div class="entry_ip">
+      <%= entry.ip %>
+    </div>
+    <div class="entry_name">
+      <b><%=entry.name%></b>
+    </div>
+  </div>
+  </a>
+<% end %>
+</div>

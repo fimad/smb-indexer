@@ -1,0 +1,5 @@
+<div class="search_box">
+<%= form_tag( {:action => "results"}, {:method => "get"} ) do %>
+  <%= text_field_tag( :query, "", {:class=>"search_text", :value=>params[:query]}) %>
+<% end %>
+</div>

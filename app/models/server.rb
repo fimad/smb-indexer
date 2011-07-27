@@ -3,18 +3,22 @@ require 'smb'
 class Server < ActiveRecord::Base
   has_many :entries, :class_name => "Entry", :conditions => "parent_id = -1"
 
-  MIN_SERVER_SIZE = 1024 #the must be sharing a gig to be considered a file sharing server
+  MIN_SERVER_SIZE = 1024**3 #the must be sharing a gig to be considered a file sharing server
 
   load 'lib/myutil.rb'
   include MyUtil
 
   def self.find_new_servers()
     SMB::Dir.foreach("smb://") do |workgroup|
-      SMB.open("smb://#{workgroup}/").to_a().each do |dir_ent|
-        if dir_ent.server? and Server.file_sharing_server?(dir_ent.name) and Server.where("name = ?", dir_ent.name).empty? then
-          new_server = Server.create(:name=>dir_ent.name(), :online=>true, :size=>"0")
-          new_server.save()
+      begin
+        SMB.open("smb://#{workgroup}/").to_a().each do |dir_ent|
+          if dir_ent.server? and Server.file_sharing_server?(dir_ent.name) and Server.where("name = ?", dir_ent.name).empty? then
+            new_server = Server.create(:name=>dir_ent.name(), :online=>true, :size=>"0")
+            new_server.save()
+          end
         end
+        rescue
+          puts "Skipping 'smb://#{workgroup}/'..."
       end
     end
   end
@@ -33,6 +37,7 @@ class Server < ActiveRecord::Base
 
   def self.update_all_servers()
     for server in Server.find(:all) do
+      puts "Working on '#{server.name}'..."
       server.smb_update()
     end
   end

@@ -15,7 +15,7 @@ class Entry < ActiveRecord::Base
 #set up the search name field
     new_search_name = name()
 #try to extract the extension
-    if( (match = new_search_name.match("(.+)\\.([^\\.]+)$")) )
+    if( not folder and (match = new_search_name.match("(.+)\\.([^\\.]+)$")) )
       new_search_name, self.extension = match.captures
     else
       self.extension = ""
@@ -46,7 +46,14 @@ class Entry < ActiveRecord::Base
 #will return true if there were changes, false otherwise
       new_size = 0
       has_changed = false
-      smb_dir = SMB::Dir.open("smb://#{path}/#{name}/")
+      smb_dir = nil
+      begin
+        smb_dir = SMB::Dir.open("smb://#{path}/#{name}/")
+        rescue
+          puts "Skipping '#{path}/#{name}'...."
+          delete()
+          return
+      end
 
 #create a hash for the names of entries that exist in this entry
       entries_to_update = {}
@@ -73,20 +80,22 @@ class Entry < ActiveRecord::Base
           begin
             new_entry = self.children.create(:name=>entry_name, :path=>path+"/"+name, :folder=>false)
             new_entry.setup
-            new_entry.server=server()
+            new_entry.server=self.server
             new_size += new_entry.size().to_i
             rescue Exception => e
               puts "Skipping '#{path}/#{entry_name}'...."
+              return
           end
         elsif dir_entry.dir? and !(dir_entry.name =~ /^\.{1,2}$/) then
           begin
-            new_entry = @children.create(:name=>entry_name, :path=>path+"/"+name, :folder=>true)
+            new_entry = self.children.create(:name=>entry_name, :path=>path+"/"+name, :folder=>true)
             new_entry.setup
             new_entry.server=self.server
             new_entry.smb_update(depth+1)
             new_size += new_entry.size().to_i
             rescue Exception => e
               puts "Skipping '#{path}/#{name}/#{entry_name}'...."
+              return
           end
         end
       end

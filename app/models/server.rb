@@ -48,8 +48,9 @@ class Server < ActiveRecord::Base
     escaped_name = name()
     escaped_name.gsub("['\\]", "") #remove ' from the name
     IO.popen("nmblookup #{escaped_name}") do |io| #unfortunately smbclient doesn't give you the ip address so we must use nmblookup to find it
-      io.readline #the first line is garbage, discard it
-      result_line = io.readline
+      result_line = ""
+      #the last line is the only one we want, everything before is logging info
+      io.each_line { |line| result_line = line }
       if( match = result_line.match("^([0-9\.]+) ") )
         self.ip = match.captures[0]
       end
@@ -121,7 +122,7 @@ class Server < ActiveRecord::Base
 
 #based on the name of this server, is it likely that it is a file sharing server
   def self.file_sharing_server?(name)
-    return (name.length > 1 and !(name =~ /[0-9]+-[0-9]+/) and !(name =~ /[\-_](DELL|THINK|ALIEN)$/) and !(name =~ /MACBOOK/) and !(name =~ /-PC[0-9]*/) and !(name =~ /\-COMPUTER/) and !(name =~ /[a-zA-Z]{2,3}[0-9]{5,6}/))
+    return (name.length > 1 and !(name =~ /[0-9]+-[0-9]+/) and !(name =~ /[\-_](DELL|THINK|ALIEN)$/) and !(name =~ /MACBOOK/) and !(name =~ /-PC[0-9]*/) and !(name =~ /\-(LAPTOP|COMPUTER)/) and !(name =~ /[a-zA-Z]{2,3}[0-9]{5,6}/))
   end
 
 end

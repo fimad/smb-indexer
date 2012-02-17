@@ -24,12 +24,15 @@ class Entry < ActiveRecord::Base
     self.search_name = new_search_name
 #set up created at and the size
     begin
-      file_stat = SMB::File::Stat.stat("smb://#{path}/#{name}/")
-      self.created_at = file_stat.mtime()
-      if( file_stat.size() < 0 )
-        self.size = file_stat.size().to_s + 2**32
-      else
-        self.size = file_stat.size().to_s
+#stating shares causes a segfault for me :/
+      if parent_id() != -1 then
+        file_stat = SMB::File::Stat.stat("smb://#{path}/#{name}/")
+        self.created_at = file_stat.mtime()
+        if( file_stat.size() < 0 )
+          self.size = file_stat.size().to_s + 2**32
+        else
+          self.size = file_stat.size().to_s
+        end
       end
       rescue
         #server is probably down...
@@ -103,8 +106,11 @@ class Entry < ActiveRecord::Base
 #update ourselves if there have been any changes
       if has_changed
         self.size = new_size.to_s
-        file_stat = SMB::File::Stat.stat("smb://#{path}/#{name}")
-        self.created_at = file_stat.mtime()
+#stating shares seems to be bad
+        if parent_id() != -1 then
+          file_stat = SMB::File::Stat.stat("smb://#{path}/#{name}")
+          self.created_at = file_stat.mtime()
+        end
         save()
       end
 

@@ -60,9 +60,11 @@ div.top div.bar div.item_chosen{
   color: #FFFFFF;
   background-color: #5C43D9;
 
+  /*
   border-top-style: solid;
   border-top-color: #FFFFFF;
   border-top-width: 1px;
+  */
 
   /*
   border-bottom-style: solid;

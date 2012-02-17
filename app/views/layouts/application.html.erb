@@ -4,6 +4,7 @@
   <title>:D</title>
   <%= stylesheet_link_tag "main.css" %>
   <%= javascript_include_tag :defaults %>
+  <%= javascript_include_tag "prototype.js" %>
   <%= javascript_include_tag "util.js" %>
   <%= csrf_meta_tag %>
   <%= yield :header %>
@@ -34,7 +35,14 @@
 <div class="content">
 <%= yield %>
 </div>
+
+<%= yield :messages %>
+
 </div>
+
+<script type="text/javascript">
+  hideWindows();
+</script>
 
 </body>
 </html>

@@ -1,16 +1,18 @@
 div.top_spacer{
-  height:122px;
+  height:147px;
 }
 
 div.top{
   border-bottom-style: solid;
   border-bottom-width: 1px;
   background-color: #FFFFFF;
+  padding:0px;
 }
 
 div.search_box{
   height:70px;
   width:100%;
+  padding-bottom:20px;
 }
 
 input.search_text{
@@ -88,3 +90,76 @@ div.result_entry_date{
   float:right;
   width: 125px;
 }
+
+div.options{
+  position:absolute;
+  left:50%;
+  bottom:0px;
+  width:400px;
+  padding-top:5px;
+  margin-left:-200px;
+  text-align:center;
+  background-color: #D8D8FF;
+  
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-color: #000000;
+  border-style: solid;
+  border-width: 1px;
+  border-bottom-width: 0px;
+}
+
+div.options a{
+  text-decoration: none;
+  color: #000000;
+  font-weight: bold;
+}
+
+div.message_box {
+  border-radius:0px;
+  margin-top: 5px;
+  border-top-width:0px;
+  border-color:#000000;
+}
+
+div.message_box a{
+  text-decoration: none;
+  color: #000000;
+}
+
+div.filter_box{
+  width: 400px;
+  height: 135px;
+}
+
+div.filter_box div.content div.label{
+  float:left;
+  width: 50%;
+  text-align:center;
+  padding-bottom:3px;
+}
+
+div.filter_box div.content div.full_label{
+  float:left;
+  width: 100%;
+  text-align:center;
+}
+
+div.sort_box{
+/*  width: 225px;*/
+  width:400px;
+  height: 100px;
+}
+
+div.sort_box div.content div.label{
+  float:left;
+  width: 45%%;
+  text-align:right;
+}
+
+div.sort_box div.content div.choice{
+  float:left;
+  width: 25%;
+  text-align:center;
+}
+

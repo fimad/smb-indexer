@@ -21,6 +21,7 @@ class Entry < ActiveRecord::Base
       self.extension = ""
     end
     new_search_name = new_search_name.downcase.gsub("[^a-z0-9]", "")
+    self.extension.downcase!
     self.search_name = new_search_name
 #set up created at and the size
     begin

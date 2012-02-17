@@ -2,18 +2,51 @@
   <%= stylesheet_link_tag "results.css" %>
 <% end %>
 
+<% content_for :messages do %>
+<div class="message_box filter_box" id="filter_box">
+  <div class="content">
+    <div class="label"><%= link_to "Folders", params.merge(:controller=>"search",:action=>"results",:filter => "Folders")%></div>
+    <div class="label"><%= link_to "Video", params.merge(:controller=>"search",:action=>"results",:filter => "Video")%></div>
+    <div class="label"><%= link_to "Audio", params.merge(:controller=>"search",:action=>"results",:filter => "Audio")%></div>
+    <div class="label"><%= link_to "Applications", params.merge(:controller=>"search",:action=>"results",:filter => "Applications")%></div>
+    <div class="label"><%= link_to "Images", params.merge(:controller=>"search",:action=>"results",:filter => "Images")%></div>
+    <div class="label"><%= link_to "ISO's", params.merge(:controller=>"search",:action=>"results",:filter => "ISO's")%></div>
+    <div class="label"><%= link_to "Text/Ebooks", params.merge(:controller=>"search",:action=>"results",:filter => "Text/Ebooks")%></div>
+    <div class="label"><%= link_to "Archives", params.merge(:controller=>"search",:action=>"results",:filter => "Archives")%></div>
+    <div class="full_label"><%= link_to "Everything", params.merge(:controller=>"search",:action=>"results",:filter => "All")%></div>
+  </div>
+</div>
+<div class="message_box sort_box" id="sort_box">
+  <div class="content">
+    <div class="label">Relevance</div>
+    <div class="choice">Up</div><div class="choice">Down</div>
+    
+    <div class="label">Name</div>
+    <div class="choice">Up</div><div class="choice">Down</div>
+
+    <div class="label">Size</div>
+    <div class="choice">Up</div><div class="choice">Down</div>
+
+    <div class="label">Date Added</div>
+    <div class="choice">Up</div><div class="choice">Down</div>
+  </div>
+</div>
+<% end %>
+
 <% content_for :top do %>
   <%= render "search_bar" %>
 
 <%
 #Lables along the top of each column 
 %>
-<% if not @too_short %>
-<div style="position:absolute;left:50%;width:300px;margin-left:-150px;text-align:center;">
-Filter: <a href="#">All</a>
+<%# if not @too_short %>
+<div class="options">
+Showing: <a id="filter_link" href="javascript:;"><%=@filter%></a>
+<script>$("filter_link").observe("click", function(e){toggleWindow($("filter_box"),$$(".options")[0])});</script>
 &nbsp;
 &nbsp;
-Sort: <a href="#">Relevance</a>
+Sorting by: <a id="sort_link" href="javascript:;">Relevance</a>
+<script>$("sort_link").observe("click", function(e){toggleWindow($("sort_box"),$$(".options")[0])});</script>
 </div>
 <div>
   <div class="result_entry_left">
@@ -32,10 +65,10 @@ Sort: <a href="#">Relevance</a>
   </div>
 </div>
 <% end %>
-<% end %>
+<%# end %>
 
 <% if not @too_short %>
   <%= render "results" %>
 <% else %>
-<center>Queries must be longer than 2 characters, sorry :(</center>
+<center><br><br>Queries must be longer than 2 characters.</center>
 <% end %>

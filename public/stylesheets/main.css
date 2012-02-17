@@ -75,3 +75,33 @@ div.top div.bar div.item_chosen{
 
 div.content{
 }
+
+div.message_box{
+  position: fixed;
+  background-color: #FFFFFF;
+  z-index: 9000;
+
+  border-width: 1px;
+  border-style: solid;
+  border-color: #DDDDDD;
+
+  top: 0px;
+  left: 0px;
+  border-radius:10px;
+}
+
+div.message_box div.title{
+  border-top-left-radius:10px;
+  border-top-right-radius:10px;
+  text-align: center;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  width: 100%;
+  background-color: #2D12B5;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+div.message_box div.content{
+  padding: 5px;
+}

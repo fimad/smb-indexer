@@ -2,28 +2,59 @@
   <%= stylesheet_link_tag "browse_path.css" %>
 <% end %>
 
-<% content_for :top do %>
+<% content_for :messages do %>
+  <%= render "shared/message_types" %>
 <% end %>
 
-<%=render "sidebar"%>
+<div class="top_area">
+  <%= render "sidebar" %>
+</div>
+<div class="bottom_area">
 
-<div class="entry_list">
-<% @servers.each do |entry| %>
-  <a href="<%=url_for(:action=>"path", :q=>"#{entry.name}")%>" onmouseover="selectElement('entry_<%=entry.id%>')" onmouseout="unselectElement('entry_<%=entry.id%>')">
-  <div class="entry" id="entry_<%=entry.id%>">
-    <div class="entry_size">
-      <%=entry.fancy_size%>
+  <div class="bar_menu">
+    <div class="left">
+      <a id="filter_link" href="javascript:;">Online</a>
+      <script>$("filter_link").observe("click", function(e){toggleWindow($("filter_box"),$$(".bar_menu > .left")[0])});</script>
     </div>
-    <div class="entry_date">
-      <%= entry.updated_at().strftime("%b %d %Y") %>
-    </div>
-    <div class="entry_ip">
-      <%= entry.ip %>
-    </div>
-    <div class="entry_name">
-      <b><%=entry.name%></b>
+    <div class="right">
+      <a id="sort_link" href="javascript:;">Relevance</a>
+      <script>$("sort_link").observe("click", function(e){toggleWindow($("sort_box"),$$(".bar_menu > .right")[0])});</script>
     </div>
   </div>
-  </a>
-<% end %>
+  <div class="bar">
+    <div class="entry_name">
+    name
+    </div>
+    <div class="entry_date">
+    last online
+    </div>
+    <div class="entry_size">
+    size
+    </div>
+  </div>
+
+
+  <div class="entry_list">
+  <% @servers.each do |entry| %>
+    <a href="<%=url_for(:action=>"path", :q=>"#{entry.name}")%>" onmouseover="selectElement('entry_<%=entry.id%>')" onmouseout="unselectElement('entry_<%=entry.id%>')">
+    <div class="entry" id="entry_<%=entry.id%>">
+      <div class="entry_date">
+        <%= (entry.online) ? "NOW!" : entry.updated_at().strftime("%b %d %Y") %>
+      </div>
+      <div class="entry_size">
+        <%=entry.fancy_size%>
+      </div>
+      <div class="entry_name">
+        <b><%=entry.name%></b>
+      </div>
+    </div>
+    </a>
+  <% end %>
+  </div>
+
+  <div class="clear"></div>
+
+  <div class="footer">
+    <%= render "shared/pages" %>
+  </div>
 </div>

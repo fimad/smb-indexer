@@ -1,23 +1,7 @@
-div.top_spacer{
-  height:150px;
-}
-
-div.content{
-  position:absolute;
-  left:50%;
-  margin-left:-400px;
-  width:800px;
+div.content div.top_area{
+  height: 50px;
   text-align:center;
-}
-
-div.content a{
-  text-decoration: none;
-  color: #000000;
-}
-
-div.browse_top{
-  border-bottom-style:solid;
-  border-bottom-width:1px;
+  font-weight: 20px;
 }
 
 div.browse_server_list{

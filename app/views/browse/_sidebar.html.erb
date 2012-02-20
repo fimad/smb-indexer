@@ -1,9 +1,6 @@
-<div class="sidebar">
 <% @sidebar_items.each do |item| %>
   <a href="<%=url_for(item[:url])%>">
-  <div class="sidebar_item" id="sidebar_<%=item[:id]%>" onmouseover="selectElement('sidebar_<%=item[:id]%>')" onmouseout="unselectElement('sidebar_<%=item[:id]%>')">
     <%=item[:text]%>
-  </div>
   </a>
+  /
 <% end %>
-</div>

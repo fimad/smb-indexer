@@ -2,31 +2,63 @@
   <%= stylesheet_link_tag "browse_path.css" %>
 <% end %>
 
-<% content_for :top do %>
+<% content_for :messages do %>
+  <%= render "shared/message_types" %>
 <% end %>
 
-<%=render "sidebar"%>
+<div class="top_area">
+  <%= render "sidebar" %>
+</div>
+<div class="bottom_area">
 
-<div class="entry_list">
-<% @entries.each do |entry| %>
-  <% if entry.folder %>
-  <a href="<%=url_for(:action=>"path", :q=>"#{entry.path}/#{entry.name}")%>" onmouseover="selectElement('entry_<%=entry.id%>')" onmouseout="unselectElement('entry_<%=entry.id%>')">
-  <% end %>
-  <div class="entry" id="entry_<%=entry.id%>">
-    <div class="entry_size">
-      <%=entry.fancy_size%>
+  <div class="bar_menu">
+    <div class="left">
+      <a id="filter_link" href="javascript:;">All</a>
+      <script>$("filter_link").observe("click", function(e){toggleWindow($("filter_box"),$$(".bar_menu > .left")[0])});</script>
     </div>
-    <div class="entry_date">
-      <%= entry.created_at().strftime("%b %d %Y") %>
-    </div>
-    <div class="entry_name">
-      <%if entry.folder %><b><%end%>
-      <%=entry.name%>
-      <%if entry.folder %></b><%end%>
+    <div class="right">
+      <a id="sort_link" href="javascript:;">Relevance</a>
+      <script>$("sort_link").observe("click", function(e){toggleWindow($("sort_box"),$$(".bar_menu > .right")[0])});</script>
     </div>
   </div>
-  <% if entry.folder %>
-  </a>
+  <div class="bar">
+    <div class="entry_name">
+    name
+    </div>
+    <div class="entry_date">
+    created
+    </div>
+    <div class="entry_size">
+    size
+    </div>
+  </div>
+
+  <div class="entry_list">
+  <% @entries.each do |entry| %>
+    <% if entry.folder %>
+    <a href="<%=url_for(:action=>"path", :q=>"#{entry.path}/#{entry.name}")%>" onmouseover="selectElement('entry_<%=entry.id%>')" onmouseout="unselectElement('entry_<%=entry.id%>')">
+    <% end %>
+    <div class="entry" id="entry_<%=entry.id%>">
+      <div class="entry_date">
+        <%= entry.created_at().strftime("%b %d %Y") %>
+      </div>
+      <div class="entry_size">
+        <%=entry.fancy_size%>
+      </div>
+      <div class="entry_name">
+        <%if entry.folder %><b><%end%>
+        <%=entry.name%>
+        <%if entry.folder %></b><%end%>
+      </div>
+    </div>
+    <% if entry.folder %>
+    </a>
+    <% end %>
   <% end %>
-<% end %>
+  </div>
+
+  <div class="clear"></div>
+  <div class="footer">
+    <%= render "shared/pages" %>
+  </div>
 </div>

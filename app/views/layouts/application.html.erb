@@ -4,41 +4,40 @@
   <title>:D</title>
   <%= stylesheet_link_tag "main.css" %>
   <%= javascript_include_tag :defaults %>
-  <%= javascript_include_tag "prototype.js" %>
   <%= javascript_include_tag "util.js" %>
   <%= csrf_meta_tag %>
   <%= yield :header %>
 </head>
 <body>
+
 <div class="wrapper">
-<div class="top">
-  <div class="bar">
+  <div class="top">
+    <div class="bar">
       <div class="<%= (params[:controller] == "search")?"item_chosen" : "item"%>">
-        <%= link_to "Search", :controller => "search", :action => "index" %>
+        <%= link_to ((params[:controller] == "search")?"SEARCH":"search"), :controller => "search", :action => "index" %>
       </div>
       <div class="<%= (params[:controller] == "browse")?"item_chosen" : "item"%>">
-        <%= link_to "Browse", :controller => "browse", :action => "index" %>
+        <%= link_to ((params[:controller] == "browse")?"BROWSE":"browse"), :controller => "browse", :action => "index" %>
       </div>
       <div class="<%= (params[:controller] == "alerts")?"item_chosen" : "item"%>">
-      <a href="">Alerts</a>
+        <%= link_to ((params[:controller] == "alerts")?"ALERTS":"alerts"), :controller => "search", :action => "index" %>
+      </div>
+      <div class="<%= (params[:controller] == "requests")?"item_chosen" : "item"%>">
+        <%= link_to ((params[:controller] == "requests")?"REQUESTS":"requests"), :controller => "search", :action => "index" %>
       </div>
       <div class="<%= (params[:controller] == "about")?"item_chosen" : "item"%>">
-        <%= link_to "About", :controller => "about", :action => "index" %>
+        <%= link_to ((params[:controller] == "about")?"ABOUT":"about"), :controller => "about", :action => "index" %>
       </div>
+    </div>
   </div>
-  <div class="top_content">
-    <%= yield :top %>
+  <div class="content_wrapper">
+    <div class="content">
+      <%= yield %>
+    </div>
   </div>
-</div>
-<div class="top_spacer">&nbsp;</div>
-
-<div class="content">
-<%= yield %>
 </div>
 
 <%= yield :messages %>
-
-</div>
 
 <script type="text/javascript">
   hideWindows();

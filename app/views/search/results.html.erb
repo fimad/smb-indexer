@@ -3,19 +3,7 @@
 <% end %>
 
 <% content_for :messages do %>
-<div class="message_box filter_box" id="filter_box">
-  <div class="content">
-    <div class="label"><%= link_to "Folders", params.merge(:controller=>"search",:action=>"results",:filter => "Folders")%></div>
-    <div class="label"><%= link_to "Video", params.merge(:controller=>"search",:action=>"results",:filter => "Video")%></div>
-    <div class="label"><%= link_to "Audio", params.merge(:controller=>"search",:action=>"results",:filter => "Audio")%></div>
-    <div class="label"><%= link_to "Applications", params.merge(:controller=>"search",:action=>"results",:filter => "Applications")%></div>
-    <div class="label"><%= link_to "Images", params.merge(:controller=>"search",:action=>"results",:filter => "Images")%></div>
-    <div class="label"><%= link_to "ISO's", params.merge(:controller=>"search",:action=>"results",:filter => "ISO's")%></div>
-    <div class="label"><%= link_to "Text/Ebooks", params.merge(:controller=>"search",:action=>"results",:filter => "Text/Ebooks")%></div>
-    <div class="label"><%= link_to "Archives", params.merge(:controller=>"search",:action=>"results",:filter => "Archives")%></div>
-    <div class="full_label"><%= link_to "Everything", params.merge(:controller=>"search",:action=>"results",:filter => "All")%></div>
-  </div>
-</div>
+  <%= render "shared/message_types" %>
 <div class="message_box sort_box" id="sort_box">
   <div class="content">
     <div class="label">Relevance</div>
@@ -27,48 +15,54 @@
     <div class="label">Size</div>
     <div class="choice">Up</div><div class="choice">Down</div>
 
-    <div class="label">Date Added</div>
+    <div class="label">Created</div>
     <div class="choice">Up</div><div class="choice">Down</div>
   </div>
 </div>
 <% end %>
 
-<% content_for :top do %>
+
+<% #normal content %>
+
+<div class="top_area">
   <%= render "search_bar" %>
-
-<%
-#Lables along the top of each column 
-%>
-<%# if not @too_short %>
-<div class="options">
-Showing: <a id="filter_link" href="javascript:;"><%=@filter%></a>
-<script>$("filter_link").observe("click", function(e){toggleWindow($("filter_box"),$$(".options")[0])});</script>
-&nbsp;
-&nbsp;
-Sorting by: <a id="sort_link" href="javascript:;">Relevance</a>
-<script>$("sort_link").observe("click", function(e){toggleWindow($("sort_box"),$$(".options")[0])});</script>
 </div>
-<div>
-  <div class="result_entry_left">
-    <div class="result_entry_name">
-    name
+
+<div class="bottom_area">
+  <div class="bar_menu">
+    <div class="left">
+      <a id="filter_link" href="javascript:;"><%=@filter%></a>
+      <script>$("filter_link").observe("click", function(e){toggleWindow($("filter_box"),$$(".bar_menu > .left")[0])});</script>
+    </div>
+    <div class="right">
+      <a id="sort_link" href="javascript:;">Relevance</a>
+      <script>$("sort_link").observe("click", function(e){toggleWindow($("sort_box"),$$(".bar_menu > .right")[0])});</script>
     </div>
   </div>
-  <div class="result_entry_middle">&nbsp;</div>
-  <div class="result_entry_right">
-    <div class="result_entry_date">
-    date
+  <div class="bar">
+    <div class="result_entry_left">
+      <div class="result_entry_name">
+      name
+      </div>
     </div>
-    <div class="result_entry_size">
-    size
+    <div class="result_entry_middle">&nbsp;</div>
+    <div class="result_entry_right">
+      <div class="result_entry_date">
+      created
+      </div>
+      <div class="result_entry_size">
+      size
+      </div>
     </div>
   </div>
-</div>
-<% end %>
-<%# end %>
 
-<% if not @too_short %>
-  <%= render "results" %>
-<% else %>
-<center><br><br>Queries must be longer than 2 characters.</center>
-<% end %>
+  <% if not @too_short %>
+    <%= render "results" %>
+  <% else %>
+  <center><br><br>Queries must be longer than 2 characters.</center>
+  <% end %>
+
+  <div class="footer">
+    <%= render "shared/pages" %>
+  </div>
+</div>

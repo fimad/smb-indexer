@@ -1,5 +1,5 @@
-var mouseOverColor = "#E4E5F5";
-var mouseOutColor = "#FFFFFF";
+var mouseOverColor = "#e4e5e7";
+var mouseOutColor = "transparent";
 
 function selectElement(e){
   document.getElementById(e).style.backgroundColor = mouseOverColor;
@@ -11,14 +11,18 @@ function unselectElement(e){
 
 function hideWindows(){
   $$(".message_box").each(Element.hide);
+  $$(".bar_menu > div").each( function (e){Element.removeClassName(e,"chosen")} );
 }
 
 function showWindow(win,near){
   hideWindows()
-  var pos = near.viewportOffset()
+  var near_parent = $(near.parentNode);
+  var pos = near_parent.viewportOffset()
+  near.addClassName("chosen");
   win.setStyle({
-    top: (pos.top+near.getHeight())+"px",
-    left: (pos.left-win.getWidth()/2+near.getWidth()/2)+"px",
+    width: near_parent.getWidth()+"px",
+    top: (pos.top+near_parent.getHeight())+"px",
+    left: (pos.left-near_parent.getWidth()/2+near_parent.getWidth()/2)+"px",
   });
   win.show();
 }

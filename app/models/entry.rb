@@ -26,7 +26,7 @@ class Entry < ActiveRecord::Base
 #set up created at and the size
     begin
 #stating shares causes a segfault for me :/
-      if parent_id() != -1 then
+      if not folder() then
         file_stat = SMB::File::Stat.stat("smb://#{path}/#{name}/")
         self.created_at = file_stat.mtime()
         if( file_stat.size() < 0 )
@@ -108,7 +108,8 @@ class Entry < ActiveRecord::Base
       if has_changed
         self.size = new_size.to_s
 #stating shares seems to be bad
-        if parent_id() != -1 then
+#if parent_id() != -1 then
+        if not folder() then
           file_stat = SMB::File::Stat.stat("smb://#{path}/#{name}")
           self.created_at = file_stat.mtime()
         end

@@ -1,10 +1,15 @@
 class BrowseController < ApplicationController
+  load 'lib/pageshelper.rb'
+  include PagesHelper
+
   def index
-    @servers = Server.find(:all)
+    setupPages()
+    @servers = pagedResults(Server.find(:all),20)
     @sidebar_items = [{:text=>"Server List", :url=>{:action=>"index"}}]
   end
 
   def path
+    setupPages()
     @sidebar_items = [{:text=>"Server List", :url=>{:action=>"index"}}]
     path = ""
     id = 0
@@ -18,7 +23,7 @@ class BrowseController < ApplicationController
       id += 1
     end
 
-    @entries = Entry.where("path = ?", params[:q]).order("folder DESC");
+    @entries = pagedResults(Entry.where("path = ?", params[:q]).order("folder DESC"),30);
   end
 
 end

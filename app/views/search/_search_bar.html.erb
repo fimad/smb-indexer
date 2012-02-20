@@ -2,6 +2,11 @@
 <%= form_tag( {:action => "results"}, {:method => "get"} ) do %>
   <%= hidden_field_tag :filter, params[:filter] %>
   <%= hidden_field_tag :sort, params[:sort] %>
+  <div>
+    <div class="search_text_background">
+    Search
+    </div>
   <%= text_field_tag( :query, "", {:class=>"search_text", :value=>params[:query]}) %>
+  </div>
 <% end %>
 </div>

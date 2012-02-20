@@ -68,11 +68,14 @@ class Server < ActiveRecord::Base
   def smb_update()
     new_size = 0
     smb_server = nil 
-    begin
+    (1..10).each do
+      begin
 #this will throw an exception and crash if the server is not online
-      smb_server = SMB::Dir.open("smb://#{name()}")
-      rescue
-        return
+        smb_server = SMB::Dir.open("smb://#{name()}/")
+        rescue
+          puts "\tSkipping...."
+          return
+      end
     end
 
 #will attempt to update all the entries belonging to this server
@@ -86,6 +89,7 @@ class Server < ActiveRecord::Base
 
 #iterate over all of the entries we have so far and update them if they are in the hash, delete otherwise
     for entry in self.entries().find(:all) do
+      puts "#{entry.name}!"
       if entries_to_update.has_key? entry.name 
         entry.smb_update(0)
         if entries_to_update.delete(entry.name) == nil 

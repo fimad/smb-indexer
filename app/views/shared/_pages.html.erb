@@ -1,0 +1,17 @@
+<div class="pages">
+  <% if @current_page != 1 %>
+    <%= link_to (image_tag "left_arrow.png"), params.merge(:page => (@current_page-1))%>
+  <%end%>
+  &nbsp;
+  <% (1..@total_pages).each do |page| %>
+    <% if page == @current_page %>
+      <%=page%>
+    <%else%>
+      <%= link_to page, params.merge(:page => page)%>
+    <%end%>
+  <%end%>
+  &nbsp;
+  <% if @current_page != @total_pages %>
+    <%= link_to (image_tag "right_arrow.png"), params.merge(:page => (@current_page+1))%>
+  <%end%>
+</div>

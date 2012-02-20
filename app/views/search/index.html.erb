@@ -2,11 +2,10 @@
   <%= stylesheet_link_tag "search.css" %>
 <% end %>
 
-<% content_for :top do %>
 <div class="logo">
 <%= image_tag "cecil.png" %>
 </div>
-  <%= render "search_bar" %>
-<% end %>
+
+<%= render "search_bar" %>
 
 <%= render "online_now" %>

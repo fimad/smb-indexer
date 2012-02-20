@@ -1,7 +1,3 @@
-div.top_spacer{
-  height:450px;
-}
-
 div.search_box{
   height:90px;
   width:100%;
@@ -20,14 +16,27 @@ input.search_text{
   left: 50%;
   width: 600px;
   height: 30px;
+  background-color: transparent;
+}
+
+div.search_text_background{
+  position:relative;
+  top:0px;
+  left:50%;
+  margin-left:-300px;
+  width:600px;
+  text-align:center;
+  font-size: 30px;
+  color: #e0e0e2;
 }
 
 div.online_now{
-  position: absolute;
+  position: relative;
   margin-left: -200px;
   left: 50%;
   width: 400px;
   text-align: center;
+  padding-bottom:50px;
 }
 
 div.online_now_list{
